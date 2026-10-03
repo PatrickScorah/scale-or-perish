@@ -863,6 +863,22 @@ function shareTo(platform) {
   }
   document.getElementById('shareDropdown').classList.remove('show');
 }
+
+let lastScrollY = window.scrollY;
+const banner = document.querySelector('.sticky-cta-banner');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > lastScrollY && window.scrollY > 100) {
+    // Scrolling down -> hide banner
+    banner.style.transform = 'translateY(100%)';
+    banner.style.transition = 'transform 0.3s ease-in-out';
+  } else {
+    // Scrolling up -> show banner
+    banner.style.transform = 'translateY(0)';
+  }
+  lastScrollY = window.scrollY;
+});
 </script>
+
 </body>
 </html>
