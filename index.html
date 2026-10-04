@@ -416,6 +416,65 @@ body {
     font-weight: 700;
 }
 
+/* Sticky Top Reading Header */
+.reading-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header-content {
+  max-width: 8.5in;
+  width: 100%;
+  margin: 0 auto;
+  padding: 8px 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 8.5pt;
+  color: #6b7280;
+}
+
+.doc-title {
+  font-weight: 700;
+  color: #111827;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.divider {
+  color: #d1d5db;
+}
+
+.section-title {
+  color: #2563eb;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-bar {
+  height: 2px;
+  background: #2563eb;
+  width: 0%;
+  transition: width 0.1s ease-out;
+}
+
+/* Offset body so content doesn't tuck under top bar */
+body {
+  padding-top: 50px !important;
+}
+
 @media print {
   /* Hide the sticky footer banner when printing */
   .sticky-cta-banner {
@@ -491,6 +550,16 @@ body {
  </style>
 </head>
 <body>
+
+<!-- TOP READING HEADER -->
+<header id="reading-header" class="reading-header">
+  <div class="header-content">
+    <span class="doc-title">Scale or Perish</span>
+    <span class="divider">/</span>
+    <span id="active-section-name" class="section-title">Introduction</span>
+  </div>
+  <div id="scroll-progress-bar" class="progress-bar"></div>
+</header>
 
 <div class="document">
 
@@ -897,6 +966,28 @@ window.addEventListener('scroll', () => {
   }
   lastScrollY = window.scrollY;
 });
+
+// Dynamic Section Tracker & Progress Bar
+window.addEventListener('scroll', () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById('scroll-progress-bar').style.width = scrolled + '%';
+
+  const headings = document.querySelectorAll('h2, h3');
+  let currentSection = 'Introduction';
+
+  headings.forEach(heading => {
+    const rect = heading.getBoundingClientRect();
+    if (rect.top <= 120) {
+      currentSection = heading.innerText.replace(/\n/g, ' — ');
+    }
+  });
+
+  document.getElementById('active-section-name').innerText = currentSection;
+});
+
+
 </script>
 
 </body>
