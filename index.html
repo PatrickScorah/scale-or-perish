@@ -422,6 +422,14 @@ body {
   .sticky-cta-banner {
     padding: 10px 14px;
   }
+  #active-section-name {
+    display: inline-block;
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+  }
 }
 
 .part-header {
@@ -1005,7 +1013,7 @@ window.addEventListener('scroll', () => {
   lastScrollY = window.scrollY;
 });
 
-// Helper to convert text to Title Case while preserving Roman numerals
+// Helper to convert text to Title Case
 function toTitleCase(str) {
   return str.toLowerCase().replace(/\b\w+/g, word => {
     if (/^(i|ii|iii|iv|v|vi|vii|viii|ix|x)$/i.test(word)) {
@@ -1025,18 +1033,18 @@ window.addEventListener('scroll', () => {
   const targets = document.querySelectorAll('h2.part-header, h3[id^="section-"]');
   let currentSection = 'Introduction';
   let currentPart = '';
+  const isMobile = window.innerWidth <= 640;
 
   targets.forEach(el => {
     const rect = el.getBoundingClientRect();
     if (rect.top <= 140) {
       if (el.tagName === 'H2') {
-        // Keep H2 (Part) as uppercase
         currentPart = el.innerText.trim().toUpperCase();
       } else if (el.tagName === 'H3') {
-        // Convert H3 (Section) to Title Case
         const rawText = el.innerText.split('\n')[0].trim();
         const fullText = toTitleCase(rawText);
-        currentSection = currentPart ? `${currentPart} | ${fullText}` : fullText;
+        // On mobile, show ONLY the Section title. On desktop, show PART | Section
+        currentSection = (currentPart && !isMobile) ? `${currentPart} | ${fullText}` : fullText;
       }
     }
   });
