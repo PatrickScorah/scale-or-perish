@@ -997,7 +997,7 @@ window.addEventListener('click', function(e) {
 });
 
 function shareTo(platform) {
-  const url = encodeURIComponent(window.location.href);
+  const url = encodeURIComponent(window.location.origin + window.location.pathname);
   const title = encodeURIComponent(document.title);
   
   let targetUrl = '';
