@@ -423,11 +423,7 @@ body {
     padding: 10px 14px;
   }
   #active-section-name {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: bottom;
+    max-width: none;
   }
   .reading-header span:first-child {
     white-space: nowrap;
@@ -475,12 +471,27 @@ body {
   max-width: 8.5in;
   width: 100%;
   margin: 0 auto;
-  padding: 8px 1rem;
+  padding: 8px 16px;
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 8.5pt;
   color: #6b7280;
+  min-width: 0;
+}
+
+.header-content span:first-child {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+#active-section-name {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
 }
 
 .doc-title {
