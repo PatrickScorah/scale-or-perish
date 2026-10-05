@@ -1093,6 +1093,65 @@ document.querySelectorAll('.interactive-vector').forEach(vector => {
     tooltip.innerText = 'Hover over force vectors to inspect operational definition';
   });
 });
+
+  document.addEventListener('DOMContentLoaded', function() {
+  // 1. Vector Diagram Listeners
+  const vectors = document.querySelectorAll('.interactive-vector');
+  const tooltip = document.getElementById('vector-tooltip');
+
+  vectors.forEach(vector => {
+    vector.addEventListener('mouseenter', function(e) {
+      const info = this.getAttribute('data-tooltip-info') || 'Interactive element clicked';
+      if (tooltip) {
+        tooltip.textContent = info;
+        tooltip.style.color = '#ffffff';
+      }
+    });
+
+    vector.addEventListener('mouseleave', function() {
+      if (tooltip) {
+        tooltip.textContent = 'Hover or click elements to inspect diagnostic vectors.';
+        tooltip.style.color = '#9ca3af';
+      }
+    });
+
+    vector.addEventListener('click', function() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'click_vector_diagram', {
+          'event_category': 'Engagement',
+          'event_label': this.id || 'vector_element'
+        });
+      }
+    });
+  });
+
+  // 2. Sticky CTA Banner - PDF Button Listener
+  const pdfBtn = document.querySelector('.sticky-pdf-btn');
+  if (pdfBtn) {
+    pdfBtn.addEventListener('click', function(e) {
+      window.print();
+      if (typeof gtag === 'function') {
+        gtag('event', 'download_pdf', {
+          'event_category': 'Conversion',
+          'event_label': 'Sticky Banner PDF'
+        });
+      }
+    });
+  }
+
+  // 3. Outbound Link Tracking (e.g., LinkedIn)
+  const linkedinLinks = document.querySelectorAll('a[href*="linkedin.com"]');
+  linkedinLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (typeof gtag === 'function') {
+        gtag('event', 'click_linkedin', {
+          'event_category': 'Outbound',
+          'event_label': this.href
+        });
+      }
+    });
+  });
+});
 </script>
 
 </body>
