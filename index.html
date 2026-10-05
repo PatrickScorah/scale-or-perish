@@ -511,23 +511,27 @@ html, body {
 }
 
 @media print {
-  /* Hide the sticky footer banner when printing */
-  .sticky-cta-banner {
+  /* 1. Hide both fixed floating UI elements completely */
+  .sticky-cta-banner,
+  .reading-header,
+  #shareDropdown {
     display: none !important;
   }
   
-  /* Remove body padding so it doesn't leave an empty gap at the bottom */
+  /* 2. Reset body and document spacing for print media */
   body {
-    padding: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: #ffffff !important;
   }
   
-  /* Expand document container width to fill the printed page */
   .document {
     max-width: 100% !important;
     padding: 0 !important;
+    margin: 0 !important;
   }
 
-  /* Force background graphics, charts, and images to render in print/PDF */
+  /* 3. Force exact background colors and graphic rendering in PDF outputs */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
