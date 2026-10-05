@@ -538,6 +538,17 @@ html, body {
     break-before: page !important;
   }
 
+  /* 3.5 Pull top-of-page headings up flush against top margin */
+  .page-break + h1,
+  .page-break + h2,
+  .page-break + h3,
+  .page-break + .part-header,
+  .page-break + section > h2,
+  .page-break + section > h3 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
   /* 4. Force exact background colors and graphic rendering in PDF outputs */
   * {
     -webkit-print-color-adjust: exact !important;
