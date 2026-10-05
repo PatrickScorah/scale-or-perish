@@ -546,7 +546,8 @@ html, body {
   .page-break + section > h2,
   .page-break + section > h3 {
     margin-top: 0 !important;
-    padding-top: 12pt !important; /* Pushes the border line cleanly above the header text */
+    padding-top: 0 !important;
+    border-top: none !important; /* Strips the decorative line in PDF */
   }
 
   /* 4. Force exact background colors and graphic rendering in PDF outputs */
