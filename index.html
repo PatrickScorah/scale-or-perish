@@ -532,7 +532,13 @@ html, body {
     margin: 0 !important;
   }
 
-  /* 3. Force exact background colors and graphic rendering in PDF outputs */
+  /* 3. Force hard page breaks in PDF/Print */
+  .page-break {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  /* 4. Force exact background colors and graphic rendering in PDF outputs */
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
