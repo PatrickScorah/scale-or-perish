@@ -415,9 +415,18 @@ html, body {
 @media (max-width: 640px) {
   .sticky-cta-text {
     font-size: 8.5pt;
+    display: none; /* Hides text on mobile to give room to action buttons */
   }
   .sticky-cta-banner {
     padding: 10px 14px;
+    justify-content: center;
+  }
+  .sticky-cta-actions {
+    gap: 6px;
+  }
+  .sticky-pdf-btn, .sticky-ssrn-btn, .sticky-linkedin-btn {
+    padding: 6px 10px;
+    font-size: 8.5pt;
   }
   #active-section-name {
     max-width: none;
@@ -513,6 +522,7 @@ html, body {
 @media print {
   /* 1. Hide both fixed floating UI elements completely */
   .sticky-cta-banner,
+  .sticky-ssrn-btn,
   .reading-header,
   #shareDropdown,
   .no-print {
@@ -591,6 +601,35 @@ html, body {
 .share-popover-menu a:hover {
   background-color: #f3f4f6;
   color: #111827;
+}
+
+/* Sticky SSRN Action Button */
+.sticky-ssrn-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #005580; /* Academic/SSRN Navy Accent */
+  color: #ffffff;
+  border: 1px solid #004466;
+  padding: 8px 14px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 9pt;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.sticky-ssrn-btn:hover {
+  background-color: #003d5c;
+  border-color: #002b40;
+  color: #ffffff;
+}
+
+.sticky-ssrn-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
 }
 
  </style>
@@ -934,6 +973,11 @@ html, body {
     </div>
     
     <div class="sticky-cta-actions">
+        <!-- SSRN Link -->
+        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7571160" target="_blank" rel="noopener noreferrer" class="sticky-pdf-btn" style="background-color: #005580; color: #ffffff;">
+          <span>View on SSRN</span>
+        </a>
+
         <a href="#" onclick="window.print(); return false;" class="sticky-pdf-btn">Print PDF</a>
         <a href="https://www.linkedin.com/in/patrick-scorah" target="_blank" class="sticky-linkedin-btn" aria-label="LinkedIn Profile">
           <svg class="linkedin-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
